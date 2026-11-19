@@ -1,0 +1,147 @@
+{
+  "case_id": "fim-sim-main",
+  "description": "Full replay: aliasing, case folding, attestation alerts, data gap + late segment, authorized release, rollback, trust-laundering guard, baseline swap, signer revocation, bad signature, device rebuild.",
+  "ops": [
+    {"op": "register_objects", "objects": {
+      "O1": "alpha-1", "O2": "beta-2", "O3": "gamma-3",
+      "O4": "delta-4", "O5": "epsilon-5", "O6": "zeta-6",
+      "OX": "rogue-x"
+    }},
+    {"op": "register_key", "key_id": "k-root", "secret": "root-secret"},
+    {"op": "register_key", "key_id": "k-rel", "secret": "rel-secret"},
+
+    {"op": "create_device", "device": "dev-1", "baseline": {
+      "version": 1,
+      "entries": [
+        ["C:/App/a.exe", "O1"],
+        ["C:/App/b.exe", "O1"],
+        ["C:/App/c.dll", "O2"],
+        ["D:/Data/d.dat", "O3"]
+      ],
+      "sign_with": "k-root"
+    }},
+    {"op": "view", "device": "dev-1"},
+
+    {"op": "submit_segment", "device": "dev-1", "batch": "b1", "segment_count": 2, "index": 1,
+     "observations": {"C:/APP/C.DLL": "O2", "d:/data/D.DAT": "O3"}},
+    {"op": "submit_segment", "device": "dev-1", "batch": "b1", "segment_count": 2, "index": 0,
+     "observations": {"C:/App/a.exe": "O1", "c:/app/B.EXE": "O1"}},
+    {"op": "precheck", "device": "dev-1", "batch": "b1"},
+    {"op": "commit", "precheck": "last"},
+
+    {"op": "submit_segment", "device": "dev-1", "batch": "b2", "segment_count": 1, "index": 0,
+     "observations": {"C:/App/a.exe": "O4", "C:/App/b.exe": "O1", "C:/App/c.dll": "O2", "D:/Data/d.dat": null}},
+    {"op": "precheck", "device": "dev-1", "batch": "b2", "as": "p_b2"},
+    {"op": "commit", "precheck": "p_b2"},
+    {"op": "commit", "precheck": "p_b2"},
+
+    {"op": "submit_segment", "device": "dev-1", "batch": "b3", "segment_count": 2, "index": 0,
+     "observations": {"C:/App/a.exe": "O1", "C:/App/b.exe": "O1"}},
+    {"op": "precheck", "device": "dev-1", "batch": "b3"},
+    {"op": "close_batch", "device": "dev-1", "batch": "b3"},
+    {"op": "submit_segment", "device": "dev-1", "batch": "b3", "segment_count": 2, "index": 1,
+     "observations": {"C:/App/c.dll": "O2", "D:/Data/d.dat": "O3"}},
+
+    {"op": "submit_segment", "device": "dev-1", "batch": "b4", "segment_count": 1, "index": 0,
+     "observations": {"C:/App/a.exe": "O5", "C:/App/b.exe": "O5", "C:/App/c.dll": "O2", "C:/App/e.exe": "O6"}},
+    {"op": "precheck", "device": "dev-1", "batch": "b4", "release": {
+      "version": 2,
+      "entries": [
+        ["C:/App/a.exe", "O5"],
+        ["C:/App/b.exe", "O5"],
+        ["C:/App/c.dll", "O2"],
+        ["C:/App/e.exe", "O6"]
+      ],
+      "sign_with": "k-rel"
+    }},
+    {"op": "commit", "precheck": "last"},
+
+    {"op": "submit_segment", "device": "dev-1", "batch": "b5", "segment_count": 1, "index": 0,
+     "observations": {"C:/App/a.exe": "O1", "C:/App/b.exe": "O5", "C:/App/c.dll": "O2", "C:/App/e.exe": "O6"}},
+    {"op": "precheck", "device": "dev-1", "batch": "b5"},
+    {"op": "commit", "precheck": "last"},
+
+    {"op": "submit_segment", "device": "dev-1", "batch": "b6", "segment_count": 1, "index": 0,
+     "observations": {"C:/App/a.exe": "O1", "C:/App/b.exe": "O1", "C:/App/c.dll": "O2", "D:/Data/d.dat": "O3"}},
+    {"op": "precheck", "device": "dev-1", "batch": "b6", "release": {
+      "version": 3,
+      "entries": [
+        ["C:/App/a.exe", "O1"],
+        ["C:/App/b.exe", "O1"],
+        ["C:/App/c.dll", "O2"],
+        ["D:/Data/d.dat", "O3"]
+      ],
+      "sign_with": "k-root"
+    }},
+    {"op": "commit", "precheck": "last"},
+
+    {"op": "submit_segment", "device": "dev-1", "batch": "b7", "segment_count": 1, "index": 0,
+     "observations": {"C:/App/a.exe": "OX", "C:/App/b.exe": "O1", "C:/App/c.dll": "O2", "D:/Data/d.dat": "O3"}},
+    {"op": "precheck", "device": "dev-1", "batch": "b7"},
+    {"op": "commit", "precheck": "last"},
+
+    {"op": "submit_segment", "device": "dev-1", "batch": "b8", "segment_count": 1, "index": 0,
+     "observations": {"C:/App/a.exe": "O1", "C:/App/b.exe": "O1", "C:/App/c.dll": "O2", "D:/Data/d.dat": "O3"}},
+    {"op": "precheck", "device": "dev-1", "batch": "b8", "as": "p_swap"},
+
+    {"op": "submit_segment", "device": "dev-1", "batch": "b9", "segment_count": 1, "index": 0,
+     "observations": {"C:/App/a.exe": "O1", "C:/App/b.exe": "O1", "C:/App/c.dll": "O6", "D:/Data/d.dat": "O3"}},
+    {"op": "precheck", "device": "dev-1", "batch": "b9", "release": {
+      "version": 4,
+      "entries": [
+        ["C:/App/a.exe", "O1"],
+        ["C:/App/b.exe", "O1"],
+        ["C:/App/c.dll", "O6"],
+        ["D:/Data/d.dat", "O3"]
+      ],
+      "sign_with": "k-root"
+    }},
+    {"op": "commit", "precheck": "last"},
+    {"op": "receipt", "commit": "last"},
+    {"op": "commit", "precheck": "p_swap"},
+
+    {"op": "revoke_key", "key_id": "k-rel"},
+    {"op": "submit_segment", "device": "dev-1", "batch": "b10", "segment_count": 1, "index": 0,
+     "observations": {"C:/App/a.exe": "O4", "C:/App/b.exe": "O1", "C:/App/c.dll": "O6", "D:/Data/d.dat": "O3"}},
+    {"op": "precheck", "device": "dev-1", "batch": "b10", "release": {
+      "version": 5,
+      "entries": [
+        ["C:/App/a.exe", "O4"],
+        ["C:/App/b.exe", "O1"],
+        ["C:/App/c.dll", "O6"],
+        ["D:/Data/d.dat", "O3"]
+      ],
+      "sign_with": "k-rel"
+    }},
+    {"op": "commit", "precheck": "last"},
+
+    {"op": "submit_segment", "device": "dev-1", "batch": "b11", "segment_count": 1, "index": 0,
+     "observations": {"C:/App/a.exe": "O1", "C:/App/b.exe": "O1", "C:/App/c.dll": "O6", "D:/Data/d.dat": "O3"}},
+    {"op": "precheck", "device": "dev-1", "batch": "b11", "release": {
+      "version": 6,
+      "entries": [
+        ["C:/App/a.exe", "O1"],
+        ["C:/App/b.exe", "O1"],
+        ["C:/App/c.dll", "O6"],
+        ["D:/Data/d.dat", "O3"]
+      ],
+      "key_id": "k-root",
+      "signature": "badc0ffeebadc0ffeebadc0ffeebadc0ffeebadc0ffeebadc0ffeebadc0ffeebadc0ff"
+    }},
+
+    {"op": "submit_segment", "device": "dev-1", "batch": "b12", "segment_count": 1, "index": 0,
+     "observations": {"C:/App/a.exe": "O1", "C:/App/b.exe": "O1", "C:/App/c.dll": "O6", "D:/Data/d.dat": "O3"}},
+    {"op": "precheck", "device": "dev-1", "batch": "b12", "as": "p_gen"},
+    {"op": "rebuild", "device": "dev-1", "baseline": {
+      "version": 10,
+      "entries": [
+        ["C:/App/a.exe", "O1"],
+        ["C:/App/c.dll", "O2"]
+      ],
+      "sign_with": "k-root"
+    }},
+    {"op": "commit", "precheck": "p_gen"},
+
+    {"op": "view", "device": "dev-1"}
+  ]
+}

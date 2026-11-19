@@ -1,0 +1,772 @@
+{
+  "case_id": "fim-sim-main",
+  "final_views": {
+    "dev-1": {
+      "baseline_cas": "a62176b97aa41cf2e09bb8849f3cb337cf299e7cbc17e39b0910aa80a27b1ebc",
+      "device": "dev-1",
+      "entries": [
+        {
+          "oid": "O1",
+          "path": "C:/app/a.exe",
+          "sha256": "823931b0712f4a286cef3336730fa9392715adbc2e27b7d50e87b3cdb34bdf74"
+        },
+        {
+          "oid": "O2",
+          "path": "C:/app/c.dll",
+          "sha256": "85177cd988fe646a734a523f1a03a8f6eb6038308c3b526e2a05fbea517809bc"
+        }
+      ],
+      "generation": 2,
+      "trusted_objects": [
+        "O1",
+        "O2"
+      ],
+      "version": 10
+    }
+  },
+  "ops": [
+    {
+      "index": 0,
+      "op": "register_objects",
+      "result": {
+        "count": 7
+      },
+      "status": "ok"
+    },
+    {
+      "index": 1,
+      "op": "register_key",
+      "result": {
+        "key_id": "k-root"
+      },
+      "status": "ok"
+    },
+    {
+      "index": 2,
+      "op": "register_key",
+      "result": {
+        "key_id": "k-rel"
+      },
+      "status": "ok"
+    },
+    {
+      "index": 3,
+      "op": "create_device",
+      "result": {
+        "baseline_cas": "bd2ba7fe0bd33966acea46f84bfe9df2aec50066470d40540df578a9c8aa4a23",
+        "device": "dev-1",
+        "generation": 1,
+        "version": 1
+      },
+      "status": "ok"
+    },
+    {
+      "index": 4,
+      "op": "view",
+      "result": {
+        "view": {
+          "baseline_cas": "bd2ba7fe0bd33966acea46f84bfe9df2aec50066470d40540df578a9c8aa4a23",
+          "device": "dev-1",
+          "entries": [
+            {
+              "oid": "O1",
+              "path": "C:/app/a.exe",
+              "sha256": "823931b0712f4a286cef3336730fa9392715adbc2e27b7d50e87b3cdb34bdf74"
+            },
+            {
+              "oid": "O1",
+              "path": "C:/app/b.exe",
+              "sha256": "823931b0712f4a286cef3336730fa9392715adbc2e27b7d50e87b3cdb34bdf74"
+            },
+            {
+              "oid": "O2",
+              "path": "C:/app/c.dll",
+              "sha256": "85177cd988fe646a734a523f1a03a8f6eb6038308c3b526e2a05fbea517809bc"
+            },
+            {
+              "oid": "O3",
+              "path": "D:/data/d.dat",
+              "sha256": "d9a41c651f0dbb1dd689d6d1ce0c23a609d7a7d9f6fb703276daa4e79832adbb"
+            }
+          ],
+          "generation": 1,
+          "trusted_objects": [
+            "O1",
+            "O2",
+            "O3"
+          ],
+          "version": 1
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "index": 5,
+      "op": "submit_segment",
+      "result": {
+        "batch": "b1",
+        "duplicate": false,
+        "index": 1
+      },
+      "status": "ok"
+    },
+    {
+      "index": 6,
+      "op": "submit_segment",
+      "result": {
+        "batch": "b1",
+        "duplicate": false,
+        "index": 0
+      },
+      "status": "ok"
+    },
+    {
+      "index": 7,
+      "op": "precheck",
+      "result": {
+        "alerts": [],
+        "kind": "attestation",
+        "new_cas": "bd2ba7fe0bd33966acea46f84bfe9df2aec50066470d40540df578a9c8aa4a23",
+        "precheck_id": "db01962f532dc6de5a022f06af7ee3bd570d8cebb2e2d1efb68c0b0463ec0fb5",
+        "version": 1
+      },
+      "status": "ok"
+    },
+    {
+      "index": 8,
+      "op": "commit",
+      "result": {
+        "cached": false,
+        "commit_id": "3e4886f12f101dbd6ed08dc5b020d8b5b410ad5f6ec40563e50879fd41971083",
+        "receipt": {
+          "alert_count": 0,
+          "alerts_digest": "4f73b215ddb9ef5abcedda2e24346448a9fcbcae26608165401cc9174c60c9a9",
+          "base_cas": "bd2ba7fe0bd33966acea46f84bfe9df2aec50066470d40540df578a9c8aa4a23",
+          "batch_id": "b1",
+          "commit_id": "3e4886f12f101dbd6ed08dc5b020d8b5b410ad5f6ec40563e50879fd41971083",
+          "device": "dev-1",
+          "generation": 1,
+          "kind": "attestation",
+          "new_cas": "bd2ba7fe0bd33966acea46f84bfe9df2aec50066470d40540df578a9c8aa4a23",
+          "receipt_digest": "e777bbfa53b9c0a304508fca5e94101252871da4e986cca278ec6040eb7e42fb",
+          "version": 1
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "index": 9,
+      "op": "submit_segment",
+      "result": {
+        "batch": "b2",
+        "duplicate": false,
+        "index": 0
+      },
+      "status": "ok"
+    },
+    {
+      "index": 10,
+      "op": "precheck",
+      "result": {
+        "alerts": [
+          {
+            "base_oid": "O1",
+            "detail": "untrusted object content",
+            "kind": "content_change",
+            "new_oid": "O4",
+            "path": "C:/app/a.exe"
+          },
+          {
+            "base_oid": "O3",
+            "detail": "file deleted",
+            "kind": "content_change",
+            "new_oid": null,
+            "path": "D:/data/d.dat"
+          }
+        ],
+        "kind": "attestation",
+        "new_cas": "bd2ba7fe0bd33966acea46f84bfe9df2aec50066470d40540df578a9c8aa4a23",
+        "precheck_id": "77b354dd61a3be845a1d7c017faef5055ef480dc91836f2f4088487fe86bfa0c",
+        "version": 1
+      },
+      "status": "ok"
+    },
+    {
+      "index": 11,
+      "op": "commit",
+      "result": {
+        "cached": false,
+        "commit_id": "739415652fd8cb866b4259d5388e08e0dfa3a7930a3c478c5b326d19984ab3eb",
+        "receipt": {
+          "alert_count": 2,
+          "alerts_digest": "9bbdcc76e3afd8d26ab89a98973244cd28f371857b57f9128435f52f67b7081b",
+          "base_cas": "bd2ba7fe0bd33966acea46f84bfe9df2aec50066470d40540df578a9c8aa4a23",
+          "batch_id": "b2",
+          "commit_id": "739415652fd8cb866b4259d5388e08e0dfa3a7930a3c478c5b326d19984ab3eb",
+          "device": "dev-1",
+          "generation": 1,
+          "kind": "attestation",
+          "new_cas": "bd2ba7fe0bd33966acea46f84bfe9df2aec50066470d40540df578a9c8aa4a23",
+          "receipt_digest": "c2ffc113cea692c2254259a27b58ef86ab7f720ec2b837c0a236f979e91000ff",
+          "version": 1
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "index": 12,
+      "op": "commit",
+      "result": {
+        "cached": true,
+        "commit_id": "739415652fd8cb866b4259d5388e08e0dfa3a7930a3c478c5b326d19984ab3eb",
+        "receipt": {
+          "alert_count": 2,
+          "alerts_digest": "9bbdcc76e3afd8d26ab89a98973244cd28f371857b57f9128435f52f67b7081b",
+          "base_cas": "bd2ba7fe0bd33966acea46f84bfe9df2aec50066470d40540df578a9c8aa4a23",
+          "batch_id": "b2",
+          "commit_id": "739415652fd8cb866b4259d5388e08e0dfa3a7930a3c478c5b326d19984ab3eb",
+          "device": "dev-1",
+          "generation": 1,
+          "kind": "attestation",
+          "new_cas": "bd2ba7fe0bd33966acea46f84bfe9df2aec50066470d40540df578a9c8aa4a23",
+          "receipt_digest": "c2ffc113cea692c2254259a27b58ef86ab7f720ec2b837c0a236f979e91000ff",
+          "version": 1
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "index": 13,
+      "op": "submit_segment",
+      "result": {
+        "batch": "b3",
+        "duplicate": false,
+        "index": 0
+      },
+      "status": "ok"
+    },
+    {
+      "code": "ERR_INCOMPLETE_OBSERVATION",
+      "detail": "missing segments: [1]",
+      "index": 14,
+      "op": "precheck",
+      "status": "error"
+    },
+    {
+      "index": 15,
+      "op": "close_batch",
+      "result": {
+        "cached": false,
+        "commit_id": "94c189ec7f65e0b34cd93a2772090cdb819c47903a8621876a97289e0bf566ef",
+        "receipt": {
+          "alert_count": 1,
+          "alerts_digest": "9afd1b8adfe1efa5fd694421fa519c4d8ecf7bab198dc9d36480c3e7f1573504",
+          "base_cas": "bd2ba7fe0bd33966acea46f84bfe9df2aec50066470d40540df578a9c8aa4a23",
+          "batch_id": "b3",
+          "commit_id": "94c189ec7f65e0b34cd93a2772090cdb819c47903a8621876a97289e0bf566ef",
+          "device": "dev-1",
+          "generation": 1,
+          "kind": "gap",
+          "new_cas": "bd2ba7fe0bd33966acea46f84bfe9df2aec50066470d40540df578a9c8aa4a23",
+          "receipt_digest": "a50e65b9e0836e8d95b18ac6eadf24c11a033dbbdc5063d09c72f9b95685e013",
+          "version": 1
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "code": "ERR_BATCH_CLOSED",
+      "detail": "b3",
+      "index": 16,
+      "op": "submit_segment",
+      "status": "error"
+    },
+    {
+      "index": 17,
+      "op": "submit_segment",
+      "result": {
+        "batch": "b4",
+        "duplicate": false,
+        "index": 0
+      },
+      "status": "ok"
+    },
+    {
+      "index": 18,
+      "op": "precheck",
+      "result": {
+        "alerts": [
+          {
+            "base_oid": "O1",
+            "detail": "changed by release",
+            "kind": "legit_release",
+            "new_oid": "O5",
+            "path": "C:/app/a.exe"
+          },
+          {
+            "base_oid": "O1",
+            "detail": "changed by release",
+            "kind": "legit_release",
+            "new_oid": "O5",
+            "path": "C:/app/b.exe"
+          },
+          {
+            "base_oid": null,
+            "detail": "added by release",
+            "kind": "legit_release",
+            "new_oid": "O6",
+            "path": "C:/app/e.exe"
+          },
+          {
+            "base_oid": "O3",
+            "detail": "removed by release",
+            "kind": "legit_release",
+            "new_oid": null,
+            "path": "D:/data/d.dat"
+          }
+        ],
+        "kind": "release",
+        "new_cas": "5cdfc9bdf777b911d4beb91f9144639a6dd1aef7ca81a18c8bbd610b84b960f2",
+        "precheck_id": "ab90eb1516721136f75a1cc48b6f3c4ee29c2306a5f725c43a41d46bd4252b75",
+        "version": 2
+      },
+      "status": "ok"
+    },
+    {
+      "index": 19,
+      "op": "commit",
+      "result": {
+        "cached": false,
+        "commit_id": "294053708b2dcbcd258a38e6d76c6b95937ebaf98591c8b4bb25504e5077d55b",
+        "receipt": {
+          "alert_count": 4,
+          "alerts_digest": "d574489d54db8cf7285cb3f23b80f34692fb9c251d271188702e8b25618977a4",
+          "base_cas": "bd2ba7fe0bd33966acea46f84bfe9df2aec50066470d40540df578a9c8aa4a23",
+          "batch_id": "b4",
+          "commit_id": "294053708b2dcbcd258a38e6d76c6b95937ebaf98591c8b4bb25504e5077d55b",
+          "device": "dev-1",
+          "generation": 1,
+          "kind": "release",
+          "new_cas": "5cdfc9bdf777b911d4beb91f9144639a6dd1aef7ca81a18c8bbd610b84b960f2",
+          "receipt_digest": "19af010447d264e627125294fdbbcd1e06b89f0271a4c2c507f11eaf67ab0fc6",
+          "version": 2
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "index": 20,
+      "op": "submit_segment",
+      "result": {
+        "batch": "b5",
+        "duplicate": false,
+        "index": 0
+      },
+      "status": "ok"
+    },
+    {
+      "index": 21,
+      "op": "precheck",
+      "result": {
+        "alerts": [
+          {
+            "base_oid": "O5",
+            "detail": "untrusted object content",
+            "kind": "content_change",
+            "new_oid": "O1",
+            "path": "C:/app/a.exe"
+          }
+        ],
+        "kind": "attestation",
+        "new_cas": "5cdfc9bdf777b911d4beb91f9144639a6dd1aef7ca81a18c8bbd610b84b960f2",
+        "precheck_id": "95e38ad2a49450fea094ae3796ae1eabe131b3b4299dd289d294146b72e09333",
+        "version": 2
+      },
+      "status": "ok"
+    },
+    {
+      "index": 22,
+      "op": "commit",
+      "result": {
+        "cached": false,
+        "commit_id": "6e5dbb3004aa7787664a261e6c1645729e50900abdee932c54762d5ec08ea3dd",
+        "receipt": {
+          "alert_count": 1,
+          "alerts_digest": "057083eb2ec0ffd458330d8066d4bf558d68b6f2bd07bd2889e1461a7eb8b626",
+          "base_cas": "5cdfc9bdf777b911d4beb91f9144639a6dd1aef7ca81a18c8bbd610b84b960f2",
+          "batch_id": "b5",
+          "commit_id": "6e5dbb3004aa7787664a261e6c1645729e50900abdee932c54762d5ec08ea3dd",
+          "device": "dev-1",
+          "generation": 1,
+          "kind": "attestation",
+          "new_cas": "5cdfc9bdf777b911d4beb91f9144639a6dd1aef7ca81a18c8bbd610b84b960f2",
+          "receipt_digest": "3a604e16c94207c2abbaeda8330d2aa9748de3da2415f97116e79a6571f27bb3",
+          "version": 2
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "index": 23,
+      "op": "submit_segment",
+      "result": {
+        "batch": "b6",
+        "duplicate": false,
+        "index": 0
+      },
+      "status": "ok"
+    },
+    {
+      "index": 24,
+      "op": "precheck",
+      "result": {
+        "alerts": [
+          {
+            "base_oid": "O5",
+            "detail": "changed by release",
+            "kind": "legit_release",
+            "new_oid": "O1",
+            "path": "C:/app/a.exe"
+          },
+          {
+            "base_oid": "O5",
+            "detail": "changed by release",
+            "kind": "legit_release",
+            "new_oid": "O1",
+            "path": "C:/app/b.exe"
+          },
+          {
+            "base_oid": "O6",
+            "detail": "removed by release",
+            "kind": "legit_release",
+            "new_oid": null,
+            "path": "C:/app/e.exe"
+          },
+          {
+            "base_oid": null,
+            "detail": "added by release",
+            "kind": "legit_release",
+            "new_oid": "O3",
+            "path": "D:/data/d.dat"
+          }
+        ],
+        "kind": "release",
+        "new_cas": "8202fc320780f6764be362cf4a6e5f784391d67a459666a1a7d721ebb8e16bcc",
+        "precheck_id": "5d7fde0b42bfcd10ed338f6ef2c4d7a7df92a34ac003a314edb515f428232ca4",
+        "version": 3
+      },
+      "status": "ok"
+    },
+    {
+      "index": 25,
+      "op": "commit",
+      "result": {
+        "cached": false,
+        "commit_id": "3c6ef34ea177bab58b1878cc8307f512c15df20c9666a18de96ab0bfe5c95020",
+        "receipt": {
+          "alert_count": 4,
+          "alerts_digest": "fa8d65f284d6bf6e4b7ca119363e1925de457617aff663862b50abfc54387d5c",
+          "base_cas": "5cdfc9bdf777b911d4beb91f9144639a6dd1aef7ca81a18c8bbd610b84b960f2",
+          "batch_id": "b6",
+          "commit_id": "3c6ef34ea177bab58b1878cc8307f512c15df20c9666a18de96ab0bfe5c95020",
+          "device": "dev-1",
+          "generation": 1,
+          "kind": "release",
+          "new_cas": "8202fc320780f6764be362cf4a6e5f784391d67a459666a1a7d721ebb8e16bcc",
+          "receipt_digest": "4207fe468dbb5e0dbf2ffaaf683a7b6ba312b64437a77dc16bec50389f855a84",
+          "version": 3
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "index": 26,
+      "op": "submit_segment",
+      "result": {
+        "batch": "b7",
+        "duplicate": false,
+        "index": 0
+      },
+      "status": "ok"
+    },
+    {
+      "index": 27,
+      "op": "precheck",
+      "result": {
+        "alerts": [
+          {
+            "base_oid": "O1",
+            "detail": "untrusted object content",
+            "kind": "content_change",
+            "new_oid": "OX",
+            "path": "C:/app/a.exe"
+          }
+        ],
+        "kind": "attestation",
+        "new_cas": "8202fc320780f6764be362cf4a6e5f784391d67a459666a1a7d721ebb8e16bcc",
+        "precheck_id": "9434b5da8b0ff82bb031f0971e763bc91af07c0a85c183da826b5c2390791f0d",
+        "version": 3
+      },
+      "status": "ok"
+    },
+    {
+      "index": 28,
+      "op": "commit",
+      "result": {
+        "cached": false,
+        "commit_id": "36e4d022104c78ab2df8b401ba14124e1336635ad51067ead15b52d82229d622",
+        "receipt": {
+          "alert_count": 1,
+          "alerts_digest": "0913b7fb145a5d7bbc48c378427c37905f54dc4972e0dab8cbcaa85cca0accd2",
+          "base_cas": "8202fc320780f6764be362cf4a6e5f784391d67a459666a1a7d721ebb8e16bcc",
+          "batch_id": "b7",
+          "commit_id": "36e4d022104c78ab2df8b401ba14124e1336635ad51067ead15b52d82229d622",
+          "device": "dev-1",
+          "generation": 1,
+          "kind": "attestation",
+          "new_cas": "8202fc320780f6764be362cf4a6e5f784391d67a459666a1a7d721ebb8e16bcc",
+          "receipt_digest": "e331bbaa0bec5586837fefa0139886fe5bf60cd02be50ecdd567f84e438f9533",
+          "version": 3
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "index": 29,
+      "op": "submit_segment",
+      "result": {
+        "batch": "b8",
+        "duplicate": false,
+        "index": 0
+      },
+      "status": "ok"
+    },
+    {
+      "index": 30,
+      "op": "precheck",
+      "result": {
+        "alerts": [],
+        "kind": "attestation",
+        "new_cas": "8202fc320780f6764be362cf4a6e5f784391d67a459666a1a7d721ebb8e16bcc",
+        "precheck_id": "91d0f582a27744cc7defabae192de32f0daae62cd00e33d59da13c0fb51e5172",
+        "version": 3
+      },
+      "status": "ok"
+    },
+    {
+      "index": 31,
+      "op": "submit_segment",
+      "result": {
+        "batch": "b9",
+        "duplicate": false,
+        "index": 0
+      },
+      "status": "ok"
+    },
+    {
+      "index": 32,
+      "op": "precheck",
+      "result": {
+        "alerts": [
+          {
+            "base_oid": "O2",
+            "detail": "changed by release",
+            "kind": "legit_release",
+            "new_oid": "O6",
+            "path": "C:/app/c.dll"
+          }
+        ],
+        "kind": "release",
+        "new_cas": "8bb54b3164db9eb2fd8a49fd4bae0f71c438c9523b84ffae8b635d24b627fd19",
+        "precheck_id": "531ad51458adcafb6bb377e078616e4f51ac874f84ac2185036e561f8409f688",
+        "version": 4
+      },
+      "status": "ok"
+    },
+    {
+      "index": 33,
+      "op": "commit",
+      "result": {
+        "cached": false,
+        "commit_id": "624b4bbe64908cf114590eaca203324e3db89b9ff5fc95aa5de168be032c3851",
+        "receipt": {
+          "alert_count": 1,
+          "alerts_digest": "cd27e9cc8316c1b3dc1b366189fd0fe44cc582047738a49df3eea8437638b975",
+          "base_cas": "8202fc320780f6764be362cf4a6e5f784391d67a459666a1a7d721ebb8e16bcc",
+          "batch_id": "b9",
+          "commit_id": "624b4bbe64908cf114590eaca203324e3db89b9ff5fc95aa5de168be032c3851",
+          "device": "dev-1",
+          "generation": 1,
+          "kind": "release",
+          "new_cas": "8bb54b3164db9eb2fd8a49fd4bae0f71c438c9523b84ffae8b635d24b627fd19",
+          "receipt_digest": "a1846ab525a49a7d44f4a4ca9633590242aa05f20a4d04de13e82d48f270bc37",
+          "version": 4
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "index": 34,
+      "op": "receipt",
+      "result": {
+        "receipt": {
+          "alert_count": 1,
+          "alerts_digest": "cd27e9cc8316c1b3dc1b366189fd0fe44cc582047738a49df3eea8437638b975",
+          "base_cas": "8202fc320780f6764be362cf4a6e5f784391d67a459666a1a7d721ebb8e16bcc",
+          "batch_id": "b9",
+          "commit_id": "624b4bbe64908cf114590eaca203324e3db89b9ff5fc95aa5de168be032c3851",
+          "device": "dev-1",
+          "generation": 1,
+          "kind": "release",
+          "new_cas": "8bb54b3164db9eb2fd8a49fd4bae0f71c438c9523b84ffae8b635d24b627fd19",
+          "receipt_digest": "a1846ab525a49a7d44f4a4ca9633590242aa05f20a4d04de13e82d48f270bc37",
+          "version": 4
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "code": "ERR_BASELINE_SWAPPED",
+      "detail": "current baseline CAS differs from precheck baseline",
+      "index": 35,
+      "op": "commit",
+      "status": "error"
+    },
+    {
+      "index": 36,
+      "op": "revoke_key",
+      "result": {
+        "key_id": "k-rel",
+        "revoked": true
+      },
+      "status": "ok"
+    },
+    {
+      "index": 37,
+      "op": "submit_segment",
+      "result": {
+        "batch": "b10",
+        "duplicate": false,
+        "index": 0
+      },
+      "status": "ok"
+    },
+    {
+      "index": 38,
+      "op": "precheck",
+      "result": {
+        "alerts": [
+          {
+            "base_oid": "O1",
+            "detail": "changed by release",
+            "kind": "legit_release",
+            "new_oid": "O4",
+            "path": "C:/app/a.exe"
+          }
+        ],
+        "kind": "release",
+        "new_cas": "b1e45acb94400c567b0a0f8ce5ab1492889a59f49d8c4132f21850a336bbde75",
+        "precheck_id": "c40630e06cc798edb81ecb0a1e075d55640277a55170f68030ebdfd413994b8c",
+        "version": 5
+      },
+      "status": "ok"
+    },
+    {
+      "code": "ERR_SIGNER_REVOKED",
+      "detail": "k-rel",
+      "index": 39,
+      "op": "commit",
+      "status": "error"
+    },
+    {
+      "index": 40,
+      "op": "submit_segment",
+      "result": {
+        "batch": "b11",
+        "duplicate": false,
+        "index": 0
+      },
+      "status": "ok"
+    },
+    {
+      "code": "ERR_BAD_SIGNATURE",
+      "detail": "k-root",
+      "index": 41,
+      "op": "precheck",
+      "status": "error"
+    },
+    {
+      "index": 42,
+      "op": "submit_segment",
+      "result": {
+        "batch": "b12",
+        "duplicate": false,
+        "index": 0
+      },
+      "status": "ok"
+    },
+    {
+      "index": 43,
+      "op": "precheck",
+      "result": {
+        "alerts": [],
+        "kind": "attestation",
+        "new_cas": "8bb54b3164db9eb2fd8a49fd4bae0f71c438c9523b84ffae8b635d24b627fd19",
+        "precheck_id": "dfee39d198761f5fc79d59a221258e9ab22353ef6fbb334bdffb137b7c02da91",
+        "version": 4
+      },
+      "status": "ok"
+    },
+    {
+      "index": 44,
+      "op": "rebuild",
+      "result": {
+        "baseline_cas": "a62176b97aa41cf2e09bb8849f3cb337cf299e7cbc17e39b0910aa80a27b1ebc",
+        "device": "dev-1",
+        "generation": 2,
+        "version": 10
+      },
+      "status": "ok"
+    },
+    {
+      "code": "ERR_GENERATION_CHANGED",
+      "detail": "device at generation 2, precheck pinned to 1",
+      "index": 45,
+      "op": "commit",
+      "status": "error"
+    },
+    {
+      "index": 46,
+      "op": "view",
+      "result": {
+        "view": {
+          "baseline_cas": "a62176b97aa41cf2e09bb8849f3cb337cf299e7cbc17e39b0910aa80a27b1ebc",
+          "device": "dev-1",
+          "entries": [
+            {
+              "oid": "O1",
+              "path": "C:/app/a.exe",
+              "sha256": "823931b0712f4a286cef3336730fa9392715adbc2e27b7d50e87b3cdb34bdf74"
+            },
+            {
+              "oid": "O2",
+              "path": "C:/app/c.dll",
+              "sha256": "85177cd988fe646a734a523f1a03a8f6eb6038308c3b526e2a05fbea517809bc"
+            }
+          ],
+          "generation": 2,
+          "trusted_objects": [
+            "O1",
+            "O2"
+          ],
+          "version": 10
+        }
+      },
+      "status": "ok"
+    }
+  ],
+  "reference": {
+    "match": true,
+    "mismatches": []
+  }
+}
